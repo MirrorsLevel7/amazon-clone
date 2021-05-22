@@ -5,12 +5,18 @@ import {
   MenuIcon,
 } from "@heroicons/react/outline";
 
+import { signIn, signOut, useSession } from "next-auth/client";
+import { useRouter } from "next/router";
+
 function Header() {
+  const [session] = useSession();
+  const router = useRouter();
   return (
     <header>
       <div className="flex flex-grow items-center bg-amazon_blue p-1">
         <div className="mt-1 flex flex-grow items-center sm:flex-grow-0">
           <Image
+            onClick={() => router.push("/")}
             src="https://links.papareact.com/f90"
             width={150}
             height={40}
@@ -26,15 +32,23 @@ function Header() {
           <SearchIcon className="h-10 p-3 0 link hover:bg-yellow-500 hover:rounded-r-md " />
         </div>
         <div className="text-white ml-6 flex items-center space-x-6 whitespace-nowrap">
-          <div className="flex flex-col  link">
-            <span className="text-sm text-gray-300">Hello, Kabwe</span>
+          <div
+            onClick={session ? signOut : signIn}
+            className="flex flex-col  link"
+          >
+            <span className="text-sm text-gray-300">
+              {session ? `hello ${session.user.name}` : "signin"}
+            </span>
             <span className="font-bold">Acount & Lists</span>
           </div>
           <div className="flex flex-col link">
             <span className="text-sm text-gray-300">Returns</span>
             <span className="font-bold">& Orders</span>
           </div>
-          <div className=" flex items-center relative link">
+          <div
+            onClick={() => router.push("/checkout")}
+            className=" flex items-center relative link"
+          >
             <span className="absolute top-0 right-10 text-sm bg-yellow-400 w-4 rounded-full font-extrabold text-black text-center">
               0
             </span>

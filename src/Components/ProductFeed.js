@@ -7,7 +7,7 @@ function ProductFeed({ products }) {
         .slice(0, 4)
         .map(({ id, title, price, description, category, image }) => (
           <Product
-            key={id}
+            id={id}
             title={title}
             price={price}
             description={description}
@@ -25,7 +25,7 @@ function ProductFeed({ products }) {
           .slice(4, 5)
           .map(({ id, title, price, description, category, image }) => (
             <Product
-              key={id}
+              id={id}
               title={title}
               price={price}
               description={description}
@@ -39,7 +39,7 @@ function ProductFeed({ products }) {
         .slice(5, products.length)
         .map(({ id, title, price, description, category, image }) => (
           <Product
-            key={id}
+            id={id}
             title={title}
             price={price}
             description={description}

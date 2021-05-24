@@ -7,12 +7,16 @@ import {
 
 import { signIn, signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
+import { selectItems } from "../slices/basketSlice";
+import { useSelector } from "react-redux";
 
 function Header() {
+  const items = useSelector(selectItems);
+
   const [session] = useSession();
   const router = useRouter();
   return (
-    <header>
+    <header className="sticky top-0 z-50">
       <div className="flex flex-grow items-center bg-amazon_blue p-1">
         <div className="mt-1 flex flex-grow items-center sm:flex-grow-0">
           <Image
@@ -50,7 +54,7 @@ function Header() {
             className=" flex items-center relative link"
           >
             <span className="absolute top-0 right-10 text-sm bg-yellow-400 w-4 rounded-full font-extrabold text-black text-center">
-              0
+              {items.length}
             </span>
             <ShoppingCartIcon className="h-10" />
             <span className="hiddden md:inline mt-2">Basket</span>
